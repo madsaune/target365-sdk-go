@@ -9,8 +9,6 @@ import (
 )
 
 const (
-	BaseURLShared     = "https://shared.target365.io/api"
-	BaseURLTest       = "https://test.target365.io/api"
 	headerAccept      = "application/json"
 	headerContentType = "application/json"
 	headerAPIKey      = "X-ApiKey"

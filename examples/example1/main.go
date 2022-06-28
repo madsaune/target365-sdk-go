@@ -5,14 +5,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/madsaune/target365-sdk-go/client"
+	"github.com/madsaune/target365-sdk-go/environments"
 	"github.com/madsaune/target365-sdk-go/services/outmessage"
 )
 
 func main() {
 	token := os.Getenv("STREX_TOKEN")
 
-	c := outmessage.NewClient(client.BaseURLShared, token)
+	client := outmessage.NewClient(string(environments.BaseURLShared), token)
 
 	message := &outmessage.Message{
 		Sender:    "Contoso",
@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// Creates a new out-message a.k.a sends it
-	resp, err := c.Create(message)
+	resp, err := client.Create(message)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
@@ -31,7 +31,7 @@ func main() {
 	fmt.Println("Location:", resp.Location)
 
 	// Get details about the out-message
-	m, err := c.Get(resp.TransactionID)
+	m, err := client.Get(resp.TransactionID)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

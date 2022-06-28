@@ -6,14 +6,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/madsaune/target365-sdk-go/client"
+	"github.com/madsaune/target365-sdk-go/environments"
 	"github.com/madsaune/target365-sdk-go/services/outmessage"
 )
 
 func main() {
 	token := os.Getenv("STREX_TOKEN")
 
-	c := outmessage.NewClient(client.BaseURLShared, token)
+	client := outmessage.NewClient(string(environments.BaseURLShared), token)
 
 	sendTime := time.Now().Add(time.Minute * 5)
 
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	// Creates a new out-message a.k.a sends it
-	resp, err := c.Create(message)
+	resp, err := client.Create(message)
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}

@@ -5,16 +5,16 @@ import (
 	"log"
 	"os"
 
-	"github.com/madsaune/target365-sdk-go/client"
+	"github.com/madsaune/target365-sdk-go/environments"
 	"github.com/madsaune/target365-sdk-go/services/outmessage"
 )
 
 func main() {
 	token := os.Getenv("STREX_TOKEN")
 
-	c := outmessage.NewClient(client.BaseURLShared, token)
+	client := outmessage.NewClient(string(environments.BaseURLShared), token)
 
-	msg, err := c.Get("<transactionID>")
+	msg, err := client.Get("<transactionID>")
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
